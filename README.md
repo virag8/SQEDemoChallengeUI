@@ -23,7 +23,7 @@ We will be evaluating
 #### Excercise
 1. Use the site at the index.html
 2. There are helper locators provided for you in the src/test/resource/files/locators.txt file.
-3. Write up your test cases in the Read me file. 
+3. In the Read me file, write up all of the test cases you think are necessary to test the sample page.
 4. Code up a few examples of 
   - At least one happy path case placing an order
   - At least one error case

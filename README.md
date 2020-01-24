@@ -1,4 +1,4 @@
-## Demo Challange
+## Demo Challenge
 
 
 #### Project Setup
@@ -20,7 +20,7 @@ We will be evaluating
 5. Code readability
 6. Code modularity
 
-#### Excercise
+#### Exercise
 1. Use the site at the index.html
 2. There are helper locators provided for you in the src/test/resource/files/locators.txt file.
 3. In the Read me file, write up all of the test cases you think are necessary to test the sample page.

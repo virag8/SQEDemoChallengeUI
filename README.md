@@ -11,6 +11,14 @@
 7. Make sure you can run the DemoTest and chrome launches.  You may need to update the chromedriver in /src/test/resources/chromedriver/ to the version that works with your browser
    https://chromedriver.chromium.org/
 
+
+#### Technologies
+1. Java
+2. Selenium
+3. TestNG
+4. Any other technologies you see fit.
+5. Please do not use a BDD framework.
+
 #### Expectations
 We will be evaluating
 1. Quality of test cases

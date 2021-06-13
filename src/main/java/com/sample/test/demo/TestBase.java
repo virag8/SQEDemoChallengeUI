@@ -16,7 +16,7 @@ public class TestBase {
     public void init() throws Throwable {
         config = new Configuration();
         url = config.getUrl();
-        initializelDriver();
+        initializeDriver();
         navigateToSite();
     }
 
@@ -33,7 +33,7 @@ public class TestBase {
         }
     }
 
-    private void initializelDriver() {
+    private void initializeDriver() {
         if (config.getBrowser().equalsIgnoreCase("chrome")) {
             if (config.getPlatform().equalsIgnoreCase("mac")) {
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/mac/chromedriver");

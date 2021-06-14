@@ -23,7 +23,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <parallel>classes</parallel>
-                    <threadCount>${testng.thread.count}</threadCount>
+<!--                    <threadCount>${testng.thread.count}</threadCount>-->
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>

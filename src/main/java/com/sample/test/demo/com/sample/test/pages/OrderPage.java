@@ -81,17 +81,17 @@ public class OrderPage {
         return this;
     }
 
-    public OrderPage ChooseQuantity(int quantity) {
+    public OrderPage ChooseQuantity(String quantity) {
         tbPizzaQty.clear();
-        tbPizzaQty.sendKeys(String.valueOf(quantity));
+        tbPizzaQty.sendKeys(quantity);
         return this;
     }
 
 
-    public OrderPage ProvidePersonalDetails(String Name, String Email, int Phone) {
+    public OrderPage ProvidePersonalDetails(String Name, String Email, String Phone) {
         tbName.sendKeys(Name);
         tbEmail.sendKeys(Email);
-        tbPhone.sendKeys(String.valueOf(Phone));
+        tbPhone.sendKeys(Phone);
         return this;
     }
 

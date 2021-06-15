@@ -8,11 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Reporter;
 
-import java.io.File;
-import java.util.Base64;
-
 public class SeleniumBase {
-    private WebDriver driver = null;
+    private WebDriver driver;
 
     public SeleniumBase(WebDriver driver) {
         this.driver = driver;
@@ -20,6 +17,10 @@ public class SeleniumBase {
 
     public Select DropDown(WebElement element) {
         return new Select(element);
+    }
+
+    public void Refresh() {
+        driver.navigate().refresh();
     }
 
     public void CaptureScreenShot() {

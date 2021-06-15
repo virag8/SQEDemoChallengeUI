@@ -16,8 +16,10 @@ public class TestBase {
     protected WebDriver driver;
     protected String url;
 
+    //TODO relaunch driver if driver is null in between tests
+
     @BeforeClass(alwaysRun = true)
-    public void init() throws Throwable {
+    public void init() {
         config = new Configuration();
         url = config.getUrl();
         initializeDriver();

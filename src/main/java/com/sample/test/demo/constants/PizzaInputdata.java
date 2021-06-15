@@ -1,26 +1,27 @@
 package com.sample.test.demo.constants;
 
+import com.sample.test.demo.utils.Randoms;
+import org.apache.maven.surefire.shade.booter.org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import java.util.Random;
 
-public class PizzaData {
-    private int quantity, phone;
-    private String name, email;
+public class PizzaInputdata {
+    private String name, quantity, email, phone;
     private PizzaTypes pizzaType;
     private PizzaToppings toppings1, toppings2;
     private PizzaPayments paymentType;
 
-    public PizzaData() {
+    public PizzaInputdata() {
 
     }
 
-    public PizzaData(int quantity, int phone, String name, String email) {
-        this.quantity = quantity;
+    public PizzaInputdata(String phone, String name, String email) {
         this.phone = phone;
         this.name = name;
         this.email = email;
     }
 
-    public PizzaData(int quantity, int phone, String name, String email, PizzaTypes pizzaType, PizzaToppings toppings1, PizzaToppings toppings2, PizzaPayments paymentType) {
+    public PizzaInputdata(String quantity, String phone, String name, String email, PizzaTypes pizzaType, PizzaToppings toppings1, PizzaToppings toppings2, PizzaPayments paymentType) {
         this.quantity = quantity;
         this.phone = phone;
         this.name = name;
@@ -31,20 +32,20 @@ public class PizzaData {
         this.paymentType = paymentType;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public PizzaData setQuantity(int quantity) {
+    public PizzaInputdata setQuantity(String quantity) {
         this.quantity = quantity;
         return this;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public PizzaData setPhone(int phone) {
+    public PizzaInputdata setPhone(String phone) {
         this.phone = phone;
         return this;
     }
@@ -53,7 +54,7 @@ public class PizzaData {
         return name;
     }
 
-    public PizzaData setName(String name) {
+    public PizzaInputdata setName(String name) {
         this.name = name;
         return this;
     }
@@ -62,7 +63,7 @@ public class PizzaData {
         return email;
     }
 
-    public PizzaData setEmail(String email) {
+    public PizzaInputdata setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -71,7 +72,7 @@ public class PizzaData {
         return pizzaType;
     }
 
-    public PizzaData setPizzaType(PizzaTypes pizzaType) {
+    public PizzaInputdata setPizzaType(PizzaTypes pizzaType) {
         this.pizzaType = pizzaType;
         return this;
     }
@@ -80,7 +81,7 @@ public class PizzaData {
         return this.toppings1;
     }
 
-    public PizzaData setToppings1(PizzaToppings toppings1) {
+    public PizzaInputdata setToppings1(PizzaToppings toppings1) {
         this.toppings1 = toppings1;
         return this;
     }
@@ -89,7 +90,7 @@ public class PizzaData {
         return this.toppings2;
     }
 
-    public PizzaData setToppings2(PizzaToppings toppings2) {
+    public PizzaInputdata setToppings2(PizzaToppings toppings2) {
         this.toppings2 = toppings2;
         return this;
     }
@@ -98,32 +99,55 @@ public class PizzaData {
         return this.paymentType;
     }
 
-    public PizzaData setCash(PizzaPayments paymentType) {
+    public PizzaInputdata setCash(PizzaPayments paymentType) {
         this.paymentType = paymentType;
         return this;
     }
 
-    public PizzaData setRandomPizzaPayment() {
+    public PizzaInputdata setRandomQuantity() {
+        this.quantity = String.valueOf(Randoms.getRandomNumber(1, 100));
+        return this;
+    }
+
+    public PizzaInputdata setRandomPizzaPayment() {
         this.paymentType = PizzaPayments.values()[new Random().nextInt(PizzaPayments.values().length)];
         return this;
     }
 
-    public PizzaData setRandomPizzaType() {
+    public PizzaInputdata setRandomPizzaType() {
         this.pizzaType = PizzaTypes.values()[new Random().nextInt(PizzaTypes.values().length)];
         return this;
     }
 
-    public PizzaData setRandomPizzaTopping1() {
+    public PizzaInputdata setRandomUniquePizzaToppings() {
+        Random rnd = new Random();
+        int index1 = rnd.nextInt(PizzaToppings.values().length),
+                index2 = rnd.nextInt(PizzaToppings.values().length);
+
+        //Choose unique toppings
+        while (index1 == index2) {
+            index1 = rnd.nextInt(PizzaToppings.values().length);
+        }
+        this.toppings1 = PizzaToppings.values()[index1];
+        this.toppings2 = PizzaToppings.values()[index2];
+        return this;
+    }
+
+    public PizzaInputdata setRandomPizzaTopping1() {
         this.toppings1 = PizzaToppings.values()[new Random().nextInt(PizzaToppings.values().length)];
         return this;
     }
 
-    public PizzaData setRandomPizzaTopping2() {
+    public PizzaInputdata setRandomPizzaTopping2() {
         this.toppings2 = PizzaToppings.values()[new Random().nextInt(PizzaToppings.values().length)];
         return this;
     }
 
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
+    }
+
     public double getTotalCost() {
-        return this.pizzaType.getCost() * this.quantity;
+        return this.pizzaType.getCost() * Integer.valueOf(this.quantity);
     }
 }

@@ -47,5 +47,26 @@ We will be evaluating
 
 #### Test Cases
 
- 1.  
+ 1.   Book Valid Order with any quantity (>1), pizza type & toppings - verify order is successful by asserting cost, dialog
+ 2.   Book Order with quantity: 0/-ve/non-integer and other valid inputs and assert order should not be successful.
+ 3.   Form checks for mandatory parameters (one or many parameters)
+ 4.   Form formatting checks for parameters like email, phone (one or many parameters)   
+ 5.   Book Valid Order with max quantity (like >100k), pizza type & toppings - verify order is successful by asserting cost, dialog
+ 6.   Book Order with phone: non-integer and other valid inputs and assert order should not be successful.
+ 7.   Book Order with same toppings & other valid inputs and assert warning/order should not successful
+ 8.   Book Order with only all mandatory fields and without any optional fields, assert warning/order should not successful
+ 9.   Reset button should clear all fields
+10.   Book Valid Re-Order with any quantity (>1), pizza type & toppings - verify order is successful by asserting cost, dialog closing
+11.   Book pizza with 0/1/2 toppings and pizza types should be displayed based on the pizza toppings#count
+12.   
+
+
+#### Defects
+ 1.   Email, phone format is not mandatory
+ 2.   Payment type is not mandatory
+ 3.   Pizza with quantity 0/non-integer/-ve give order successful message
+ 4.   Pizza with high quantity (>100k) calculates wrong cost
+ 5.   Pizza type displayed without appropriate toppings
+ 6.   Same toppings allowed for the pizza type
+ 7.   
 

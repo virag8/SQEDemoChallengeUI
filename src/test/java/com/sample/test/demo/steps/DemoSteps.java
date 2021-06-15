@@ -10,6 +10,7 @@ public class DemoSteps {
     OrderPage orderPage;
 
     public DemoSteps(WebDriver driver) {
+        driver.navigate().refresh();
         orderPage = new OrderPage(driver);
     }
 

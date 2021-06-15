@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.util.Strings;
 
 public class OrderPage {
@@ -64,6 +65,7 @@ public class OrderPage {
     }
 
     public String GetPizzaCost() {
+        Assert.assertNotNull(seleniumBase.GetElementAttribute(tbPizzaCost, "readonly"), "pizza cost textbox is not readonly");
         return Strings.isNullOrEmpty(tbPizzaCost.getText()) ? tbPizzaCost.getAttribute("value") : tbPizzaCost.getText();
     }
 
@@ -86,7 +88,6 @@ public class OrderPage {
         tbPizzaQty.sendKeys(quantity);
         return this;
     }
-
 
     public OrderPage ProvidePersonalDetails(String Name, String Email, String Phone) {
         tbName.sendKeys(Name);

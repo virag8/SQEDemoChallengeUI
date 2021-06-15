@@ -20,8 +20,6 @@ public class DemoTests extends TestBase {
     @BeforeMethod(alwaysRun = true)
     public void beforeMethodBlock(ITestResult result) {
         result.setAttribute("driver", driver);
-        driver.navigate().refresh();
-
         demoSteps = new DemoSteps(driver);
 
         pizzaInputData = new PizzaInputdata("111111111", "Harry", "abc@amail.com");
@@ -50,7 +48,7 @@ public class DemoTests extends TestBase {
         }
     }
 
-    @Test(dataProvider = "MultipleInvalidQuantity", groups = {"sanity", "regression", "negative"})
+    @Test(dataProvider = "MultipleInvalidQuantity", enabled = true, groups = {"sanity", "regression", "negative"})
     public void demoInvalidQuantityTest(Object quantity) throws CustomTestException {
         try {
 

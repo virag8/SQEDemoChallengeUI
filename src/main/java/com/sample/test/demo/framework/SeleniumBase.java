@@ -32,4 +32,8 @@ public class SeleniumBase {
             e.printStackTrace();
         }
     }
+
+    public String GetElementAttribute(WebElement element, String attribute) {
+        return element.getAttribute(attribute);
+    }
 }

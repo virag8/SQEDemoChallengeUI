@@ -17,7 +17,7 @@ public class DemoTests extends TestBase {
     DemoSteps demoSteps;
     PizzaInputdata pizzaInputData;
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod(alwaysRun = false)
     public void beforeMethodBlock(ITestResult result) {
         result.setAttribute("driver", driver);
         demoSteps = new DemoSteps(driver);
@@ -25,8 +25,33 @@ public class DemoTests extends TestBase {
         pizzaInputData = new PizzaInputdata("111111111", "Harry", "abc@amail.com");
     }
 
+    @Test(enabled = true, groups = {"regression", "boundary"})
+    public void demoValidHighQuantityTest() throws CustomTestException {
+        final String QUANTITY = "100000";
+
+        try {
+            //Preparing the test data for the testcase
+            pizzaInputData
+                    .setQuantity(QUANTITY)
+                    .setRandomPizzaPayment()
+                    .setRandomPizzaType()
+                    .setRandomUniquePizzaToppings();
+
+            //Executing the flow for the testcase on AUT
+            String pizzaCost = demoSteps.FillPizzaInputs(pizzaInputData);
+            String bookOrderMessage = demoSteps.ConfirmOrder(false);
+
+            //Validating the UI Response for the testcase as per expected
+            PizzaOutputdata pizzaOutputdata = new PizzaOutputdata(bookOrderMessage, pizzaCost);
+            PositiveAssertions.verifyValidOrder(pizzaInputData, pizzaOutputdata);
+
+        } catch (Exception e) {
+            throw new CustomTestException("Test Exception", e);
+        }
+    }
+
     @Test(invocationCount = 2, enabled = true, groups = {"sanity"})
-    public void demoValidTest() throws CustomTestException {
+    public void demoValidRandomInputsTest() throws CustomTestException {
         try {
             //Preparing the test data for the testcase
             pizzaInputData
@@ -78,7 +103,7 @@ public class DemoTests extends TestBase {
         return new Object[][]{
                 {0},
                 {-2},
-                {"abc"}
+                {"abc"},
         };
     }
 

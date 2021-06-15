@@ -1,6 +1,8 @@
 package com.sample.test.demo.com.sample.test.pages;
 
-import com.sample.test.demo.TestBase;
+import bsh.StringUtil;
+import com.sample.test.demo.framework.SeleniumBase;
+import com.sample.test.demo.framework.TestBase;
 import com.sample.test.demo.constants.PizzaPayments;
 import com.sample.test.demo.constants.PizzaToppings;
 import com.sample.test.demo.constants.PizzaTypes;
@@ -8,11 +10,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.LoadableComponent;
 import org.testng.util.Strings;
 
-public class OrderPage extends TestBase {
+public class OrderPage {
 
+    private SeleniumBase seleniumBase;
 
     @FindBy(id = "placeOrder")
     WebElement btnPlaceOrder;
@@ -58,6 +60,7 @@ public class OrderPage extends TestBase {
 
     public OrderPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        seleniumBase = new SeleniumBase(driver);
     }
 
     public String GetPizzaCost() {
@@ -93,9 +96,9 @@ public class OrderPage extends TestBase {
     }
 
     public OrderPage ChoosePizza(PizzaTypes PizzaType, PizzaToppings Toppings1, PizzaToppings Toppings2) {
-        super.DropDown(dropPizza).selectByValue(PizzaType.getDisplayName());
-        super.DropDown(dropToppings1).selectByValue(Toppings1.getDisplayName());
-        super.DropDown(dropToppings2).selectByValue(Toppings2.getDisplayName());
+        seleniumBase.DropDown(dropPizza).selectByValue(PizzaType.getDisplayName());
+        seleniumBase.DropDown(dropToppings1).selectByValue(Toppings1.getDisplayName());
+        seleniumBase.DropDown(dropToppings2).selectByValue(Toppings2.getDisplayName());
         return this;
     }
 

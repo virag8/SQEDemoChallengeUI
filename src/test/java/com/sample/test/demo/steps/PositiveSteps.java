@@ -1,11 +1,10 @@
 package com.sample.test.demo.steps;
 
-import com.sample.test.demo.TestBase;
 import com.sample.test.demo.com.sample.test.pages.OrderPage;
-import com.sample.test.demo.com.sample.test.pages.PizzaData;
+import com.sample.test.demo.constants.PizzaData;
 import org.openqa.selenium.WebDriver;
 
-public class PositiveSteps extends TestBase {
+public class PositiveSteps {
 
     public static void BookPizzaWithRandomPizzaInputs(WebDriver driver, PizzaData pizzaData) {
         OrderPage orderPage = new OrderPage(driver);
@@ -21,8 +20,6 @@ public class PositiveSteps extends TestBase {
         orderPage.ConfirmOrder();
         System.out.println(orderPage.GetPostOrderMessage());
         orderPage.ClosePostOrderMessage();
-
-
 
 
         //Assertions

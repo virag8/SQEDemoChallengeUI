@@ -1,8 +1,4 @@
-package com.sample.test.demo.com.sample.test.pages;
-
-import com.sample.test.demo.constants.PizzaPayments;
-import com.sample.test.demo.constants.PizzaToppings;
-import com.sample.test.demo.constants.PizzaTypes;
+package com.sample.test.demo.constants;
 
 import java.util.Random;
 

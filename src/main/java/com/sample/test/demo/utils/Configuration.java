@@ -1,4 +1,4 @@
-package com.sample.test.demo;
+package com.sample.test.demo.utils;
 
 import static org.testng.Assert.assertTrue;
 import java.io.IOException;

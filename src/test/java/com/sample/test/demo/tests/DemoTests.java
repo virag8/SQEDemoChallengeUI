@@ -7,7 +7,6 @@ import com.sample.test.demo.framework.CustomTestException;
 import com.sample.test.demo.constants.PizzaInputdata;
 import com.sample.test.demo.steps.DemoSteps;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,7 +16,7 @@ public class DemoTests extends TestBase {
     DemoSteps demoSteps;
     PizzaInputdata pizzaInputData;
 
-    @BeforeMethod(alwaysRun = false)
+    @BeforeMethod(alwaysRun = true)
     public void beforeMethodBlock(ITestResult result) {
         result.setAttribute("driver", driver);
         demoSteps = new DemoSteps(driver);

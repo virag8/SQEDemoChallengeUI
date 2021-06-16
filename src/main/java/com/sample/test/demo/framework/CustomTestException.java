@@ -8,7 +8,7 @@ public class CustomTestException extends Exception {
 
     public CustomTestException(String message, Throwable cause) {
         super(message, cause);
-        //TODO custom code followed by exceptions
+        Log.error(message + ": " + cause.toString());
     }
 
 

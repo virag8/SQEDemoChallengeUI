@@ -120,13 +120,12 @@ public class PizzaInputdata {
     }
 
     public PizzaInputdata setRandomUniquePizzaToppings() {
-        Random rnd = new Random();
-        int index1 = rnd.nextInt(PizzaToppings.values().length),
-                index2 = rnd.nextInt(PizzaToppings.values().length);
+        int index1 = Randoms.getRandomNumber(PizzaToppings.values().length),
+                index2 = Randoms.getRandomNumber(PizzaToppings.values().length);
 
         //Choose unique toppings
         while (index1 == index2) {
-            index1 = rnd.nextInt(PizzaToppings.values().length);
+            index1 = Randoms.getRandomNumber(PizzaToppings.values().length);
         }
         this.toppings1 = PizzaToppings.values()[index1];
         this.toppings2 = PizzaToppings.values()[index2];
@@ -134,12 +133,12 @@ public class PizzaInputdata {
     }
 
     public PizzaInputdata setRandomPizzaTopping1() {
-        this.toppings1 = PizzaToppings.values()[new Random().nextInt(PizzaToppings.values().length)];
+        this.toppings1 = PizzaToppings.values()[Randoms.getRandomNumber(PizzaToppings.values().length)];
         return this;
     }
 
     public PizzaInputdata setRandomPizzaTopping2() {
-        this.toppings2 = PizzaToppings.values()[new Random().nextInt(PizzaToppings.values().length)];
+        this.toppings2 = PizzaToppings.values()[Randoms.getRandomNumber(PizzaToppings.values().length)];
         return this;
     }
 

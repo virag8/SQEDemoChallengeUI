@@ -1,7 +1,7 @@
 package com.sample.test.demo.tests;
 
-import com.sample.test.demo.assertions.NegativeAssertions;
-import com.sample.test.demo.assertions.PositiveAssertions;
+import com.sample.test.demo.assertions.DemoTestAssertions;
+import com.sample.test.demo.assertions.IDemoTestAssertions;
 import com.sample.test.demo.constants.PizzaOutputdata;
 import com.sample.test.demo.framework.CustomTestException;
 import com.sample.test.demo.constants.PizzaInputdata;
@@ -12,9 +12,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.sample.test.demo.framework.TestBase;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class DemoTests extends TestBase {
     DemoSteps demoSteps;
     PizzaInputdata pizzaInputData;
+    public static final String SUCCESSFUL_MESSAGE = "Thank you for your order!";
+    public static final String COST_TOTAL = "TOTAL:";
 
     @BeforeMethod(alwaysRun = true)
     public void beforeMethodBlock(ITestResult result) {
@@ -36,13 +42,20 @@ public class DemoTests extends TestBase {
                     .setRandomPizzaType()
                     .setRandomUniquePizzaToppings();
 
+            //Configuring list of assertions for the testcase
+            List<IDemoTestAssertions> assertions = new ArrayList<>();
+            Collections.addAll(assertions,
+                    DemoTestAssertions.assertionPizzaCostInTextBox,
+                    DemoTestAssertions.assertionSuccessfulOrderMessage,
+                    DemoTestAssertions.assertionPizzaCostInDialog,
+                    DemoTestAssertions.assertionPizzaTypeInDialog);
+
             //Executing the flow for the testcase on AUT
             String pizzaCost = demoSteps.FillPizzaInputs(pizzaInputData);
             String bookOrderMessage = demoSteps.ConfirmOrder(false);
 
             //Validating the UI Response for the testcase as per expected
-            PizzaOutputdata pizzaOutputdata = new PizzaOutputdata(bookOrderMessage, pizzaCost);
-            PositiveAssertions.verifyValidOrder(pizzaInputData, pizzaOutputdata);
+            applyAssertions(assertions, pizzaCost, bookOrderMessage);
 
         } catch (Exception e) {
             throw new CustomTestException("Test Exception", e);
@@ -59,13 +72,20 @@ public class DemoTests extends TestBase {
                     .setRandomPizzaType()
                     .setRandomUniquePizzaToppings();
 
+            //Configuring list of assertions for the testcase
+            List<IDemoTestAssertions> assertions = new ArrayList<>();
+            Collections.addAll(assertions,
+                    DemoTestAssertions.assertionPizzaCostInTextBox,
+                    DemoTestAssertions.assertionSuccessfulOrderMessage,
+                    DemoTestAssertions.assertionPizzaCostInDialog,
+                    DemoTestAssertions.assertionPizzaTypeInDialog);
+
             //Executing the flow for the testcase on AUT
             String pizzaCost = demoSteps.FillPizzaInputs(pizzaInputData);
             String bookOrderMessage = demoSteps.ConfirmOrder(true);
 
             //Validating the UI Response for the testcase as per expected
-            PizzaOutputdata pizzaOutputdata = new PizzaOutputdata(bookOrderMessage, pizzaCost);
-            PositiveAssertions.verifyValidOrder(pizzaInputData, pizzaOutputdata);
+            applyAssertions(assertions, pizzaCost, bookOrderMessage);
 
         } catch (Exception e) {
             throw new CustomTestException("Test Exception", e);
@@ -83,19 +103,30 @@ public class DemoTests extends TestBase {
                     .setRandomPizzaType()
                     .setRandomUniquePizzaToppings();
 
+            //Configuring list of assertions for the testcase
+            List<IDemoTestAssertions> assertions = new ArrayList<>();
+            Collections.addAll(assertions,
+                    DemoTestAssertions.assertionInvalidPizzaCostInTextBox,
+                    DemoTestAssertions.assertionInvalidSuccessInDialog);
+
             //Executing the flow for the testcase on AUT
             String pizzaCost = demoSteps.FillPizzaInputs(pizzaInputData);
             String bookOrderMessage = demoSteps.ConfirmOrder(false);
 
             //Validating the UI Response for the testcase as per expected
-            PizzaOutputdata pizzaOutputdata = new PizzaOutputdata(bookOrderMessage, pizzaCost);
-            NegativeAssertions.verifyInvalidIntegerQuantity(pizzaInputData, pizzaOutputdata);
+            applyAssertions(assertions, pizzaCost, bookOrderMessage);
 
         } catch (Exception e) {
             throw new CustomTestException("Test Exception", e);
         }
     }
 
+    private void applyAssertions(List<IDemoTestAssertions> assertions, String pizzaCost, String bookOrderMessage) {
+        PizzaOutputdata pizzaOutputdata = new PizzaOutputdata(bookOrderMessage, pizzaCost);
+        for (IDemoTestAssertions IDemoTestAssertions : assertions) {
+            IDemoTestAssertions.verifyUIResponse(pizzaInputData, pizzaOutputdata);
+        }
+    }
 
     @DataProvider(name = "MultipleInvalidQuantity")
     public Object[][] MultipleInvalidQuantity() {

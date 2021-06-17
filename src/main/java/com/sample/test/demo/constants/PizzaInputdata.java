@@ -6,30 +6,19 @@ import org.apache.maven.surefire.shade.booter.org.apache.commons.lang3.builder.R
 import java.util.Random;
 
 public class PizzaInputdata {
-    private String name, quantity, email, phone;
+    private String name;
+    private String quantity;
+    private String email;
+    private String phone;
     private PizzaTypes pizzaType;
-    private PizzaToppings toppings1, toppings2;
+    private PizzaToppings toppings1;
+    private PizzaToppings toppings2;
     private PizzaPayments paymentType;
-
-    public PizzaInputdata() {
-
-    }
 
     public PizzaInputdata(String phone, String name, String email) {
         this.phone = phone;
         this.name = name;
         this.email = email;
-    }
-
-    public PizzaInputdata(String quantity, String phone, String name, String email, PizzaTypes pizzaType, PizzaToppings toppings1, PizzaToppings toppings2, PizzaPayments paymentType) {
-        this.quantity = quantity;
-        this.phone = phone;
-        this.name = name;
-        this.email = email;
-        this.pizzaType = pizzaType;
-        this.toppings1 = toppings1;
-        this.toppings2 = toppings2;
-        this.paymentType = paymentType;
     }
 
     public String getQuantity() {
@@ -120,8 +109,8 @@ public class PizzaInputdata {
     }
 
     public PizzaInputdata setRandomUniquePizzaToppings() {
-        int index1 = Randoms.getRandomNumber(PizzaToppings.values().length),
-                index2 = Randoms.getRandomNumber(PizzaToppings.values().length);
+        int index1 = Randoms.getRandomNumber(PizzaToppings.values().length);
+        int index2 = Randoms.getRandomNumber(PizzaToppings.values().length);
 
         //Choose unique toppings
         while (index1 == index2) {

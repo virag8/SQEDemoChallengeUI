@@ -4,11 +4,11 @@ import static org.testng.Assert.fail;
 
 import com.sample.test.demo.utils.Configuration;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+
+import java.io.IOException;
 
 public class TestBase {
 
@@ -20,7 +20,11 @@ public class TestBase {
 
     @BeforeClass(alwaysRun = true)
     public void init() {
-        config = new Configuration();
+        try {
+            config = new Configuration();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         url = config.getUrl();
         initializeDriver();
         navigateToSite();
@@ -32,10 +36,8 @@ public class TestBase {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        try {
+        if (driver != null) {
             driver.quit();
-
-        } catch (Exception e) {
         }
     }
 

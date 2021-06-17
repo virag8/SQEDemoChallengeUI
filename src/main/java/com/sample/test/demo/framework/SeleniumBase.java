@@ -1,6 +1,5 @@
 package com.sample.test.demo.framework;
 
-import org.apache.maven.surefire.shade.common.org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -15,15 +14,15 @@ public class SeleniumBase {
         this.driver = driver;
     }
 
-    public Select DropDown(WebElement element) {
+    public Select dropDown(WebElement element) {
         return new Select(element);
     }
 
-    public void Refresh() {
+    public void refresh() {
         driver.navigate().refresh();
     }
 
-    public void CaptureScreenShot() {
+    public void captureScreenShot() {
         try {
             String base64 = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.BASE64);
             Reporter.log("<br><img src='data:image/png;base64, " + base64 + "' height='300' width='300'/><br>");
@@ -33,7 +32,7 @@ public class SeleniumBase {
         }
     }
 
-    public String GetElementAttribute(WebElement element, String attribute) {
+    public String getElementAttribute(WebElement element, String attribute) {
         return element.getAttribute(attribute);
     }
 }

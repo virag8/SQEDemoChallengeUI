@@ -12,19 +12,17 @@ public class Configuration {
 
 
 
-    public Configuration() {
+    public Configuration() throws IOException {
         loadProperties();
     }
 
-    private void loadProperties() {
+    private void loadProperties() throws IOException {
         configProperties = new Properties();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         assertTrue(classLoader != null);
         InputStream inputStream = classLoader.getResourceAsStream(CONFIG_FILE_NAME);
-        try {
-            configProperties.load(inputStream);
-        } catch (final IOException e) {
-        }
+        configProperties.load(inputStream);
+
     }
 
     public String getBrowser() {

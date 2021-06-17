@@ -1,8 +1,6 @@
 package com.sample.test.demo.com.sample.test.pages;
 
-import bsh.StringUtil;
 import com.sample.test.demo.framework.SeleniumBase;
-import com.sample.test.demo.framework.TestBase;
 import com.sample.test.demo.constants.PizzaPayments;
 import com.sample.test.demo.constants.PizzaToppings;
 import com.sample.test.demo.constants.PizzaTypes;
@@ -64,12 +62,12 @@ public class OrderPage {
         seleniumBase = new SeleniumBase(driver);
     }
 
-    public String GetPizzaCost() {
-        Assert.assertNotNull(seleniumBase.GetElementAttribute(tbPizzaCost, "readonly"), "pizza cost textbox is not readonly");
+    public String getPizzaCost() {
+        Assert.assertNotNull(seleniumBase.getElementAttribute(tbPizzaCost, "readonly"), "pizza cost textbox is not readonly");
         return Strings.isNullOrEmpty(tbPizzaCost.getText()) ? tbPizzaCost.getAttribute("value") : tbPizzaCost.getText();
     }
 
-    public OrderPage ChoosePayment(PizzaPayments paymentType) {
+    public OrderPage choosePayment(PizzaPayments paymentType) {
         if (paymentType.equals(PizzaPayments.CASH_ON_PICKUP)) {
             rbCashPayment.click();
         } else if (paymentType.equals(PizzaPayments.CREDIT_CARD)) {
@@ -78,36 +76,36 @@ public class OrderPage {
         return this;
     }
 
-    public OrderPage ConfirmOrder() {
+    public OrderPage confirmOrder() {
         btnPlaceOrder.click();
         return this;
     }
 
-    public OrderPage ChooseQuantity(String quantity) {
+    public OrderPage chooseQuantity(String quantity) {
         tbPizzaQty.clear();
         tbPizzaQty.sendKeys(quantity);
         return this;
     }
 
-    public OrderPage ProvidePersonalDetails(String Name, String Email, String Phone) {
-        tbName.sendKeys(Name);
-        tbEmail.sendKeys(Email);
-        tbPhone.sendKeys(Phone);
+    public OrderPage providePersonalDetails(String name, String email, String phone) {
+        tbName.sendKeys(name);
+        tbEmail.sendKeys(email);
+        tbPhone.sendKeys(phone);
         return this;
     }
 
-    public OrderPage ChoosePizza(PizzaTypes PizzaType, PizzaToppings Toppings1, PizzaToppings Toppings2) {
-        seleniumBase.DropDown(dropPizza).selectByValue(PizzaType.getDisplayName());
-        seleniumBase.DropDown(dropToppings1).selectByValue(Toppings1.getDisplayName());
-        seleniumBase.DropDown(dropToppings2).selectByValue(Toppings2.getDisplayName());
+    public OrderPage choosePizza(PizzaTypes pizzaType, PizzaToppings toppings1, PizzaToppings toppings2) {
+        seleniumBase.dropDown(dropPizza).selectByValue(pizzaType.getDisplayName());
+        seleniumBase.dropDown(dropToppings1).selectByValue(toppings1.getDisplayName());
+        seleniumBase.dropDown(dropToppings2).selectByValue(toppings2.getDisplayName());
         return this;
     }
 
-    public String GetPostOrderMessage() {
+    public String getPostOrderMessage() {
         return Strings.isNullOrEmpty(dialogPostOrder.getText()) ? dialogPostOrder.getAttribute("value") : dialogPostOrder.getText();
     }
 
-    public OrderPage ClosePostOrderMessage() {
+    public OrderPage closePostOrderMessage() {
         btnCloseDialog.click();
         return this;
     }

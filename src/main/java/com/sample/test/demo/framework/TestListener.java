@@ -1,7 +1,5 @@
 package com.sample.test.demo.framework;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -24,7 +22,7 @@ public class TestListener extends TestBase implements ITestListener {
         Log.debug("The name of the testcase failed is: " + result.getName());
         WebDriver driver = (WebDriver) result.getAttribute("driver");
         if (driver != null){
-            new SeleniumBase(driver).CaptureScreenShot();
+            new SeleniumBase(driver).captureScreenShot();
         }
 
     }

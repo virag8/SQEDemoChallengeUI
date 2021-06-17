@@ -51,11 +51,15 @@ public class DemoTests extends TestBase {
                     DemoTestAssertions.assertionPizzaTypeInDialog);
 
             //Executing the flow for the testcase on AUT
-            String pizzaCost = demoSteps.FillPizzaInputs(pizzaInputData);
-            String bookOrderMessage = demoSteps.ConfirmOrder(false);
+            String pizzaCost = demoSteps.fillPizzaInputs(pizzaInputData);
+            demoSteps.confirmOrder();
+            String bookOrderMessage = demoSteps.fetchPostOrderDialog();
 
             //Validating the UI Response for the testcase as per expected
             applyAssertions(assertions, pizzaCost, bookOrderMessage);
+
+            //Post Assertion UI Flow
+            demoSteps.closeDialog();
 
         } catch (Exception e) {
             throw new CustomTestException("Test Exception", e);
@@ -81,11 +85,15 @@ public class DemoTests extends TestBase {
                     DemoTestAssertions.assertionPizzaTypeInDialog);
 
             //Executing the flow for the testcase on AUT
-            String pizzaCost = demoSteps.FillPizzaInputs(pizzaInputData);
-            String bookOrderMessage = demoSteps.ConfirmOrder(true);
+            String pizzaCost = demoSteps.fillPizzaInputs(pizzaInputData);
+            demoSteps.confirmOrder();
+            String bookOrderMessage = demoSteps.fetchPostOrderDialog();
 
             //Validating the UI Response for the testcase as per expected
             applyAssertions(assertions, pizzaCost, bookOrderMessage);
+
+            //Post Assertion UI Flow
+            demoSteps.closeDialog();
 
         } catch (Exception e) {
             throw new CustomTestException("Test Exception", e);
@@ -110,11 +118,15 @@ public class DemoTests extends TestBase {
                     DemoTestAssertions.assertionInvalidSuccessInDialog);
 
             //Executing the flow for the testcase on AUT
-            String pizzaCost = demoSteps.FillPizzaInputs(pizzaInputData);
-            String bookOrderMessage = demoSteps.ConfirmOrder(false);
+            String pizzaCost = demoSteps.fillPizzaInputs(pizzaInputData);
+            demoSteps.confirmOrder();
+            String bookOrderMessage = demoSteps.fetchPostOrderDialog();
 
             //Validating the UI Response for the testcase as per expected
             applyAssertions(assertions, pizzaCost, bookOrderMessage);
+
+            //Post Assertion UI Flow
+            demoSteps.closeDialog();
 
         } catch (Exception e) {
             throw new CustomTestException("Test Exception", e);

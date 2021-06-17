@@ -1,7 +1,5 @@
 package com.sample.test.demo.framework;
 
-import org.openqa.selenium.WebDriver;
-
 public class CustomTestException extends Exception {
     private static final long serialVersionUID = 7718828512143293558L;
 

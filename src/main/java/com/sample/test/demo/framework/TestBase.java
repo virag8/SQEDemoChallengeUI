@@ -42,9 +42,12 @@ public class TestBase {
     }
 
     private void initializeDriver() {
+        Log.info("config.getPlatform(): " + config.getPlatform());
         if (config.getBrowser().equalsIgnoreCase("chrome")) {
             if (config.getPlatform().equalsIgnoreCase("mac")) {
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/mac/chromedriver");
+            } else if (config.getPlatform().contains("linux")) {
+                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/linux/chromedriver");
             } else {
                 System.setProperty("webdriver.chrome.driver",
                         "src/test/resources/chromedriver/windows/chromedriver.exe");

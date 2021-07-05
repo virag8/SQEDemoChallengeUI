@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="chrome-mac" class="com.sample.test.demo.framework.TestBase">
+        <property name="driverKey" value="webdriver.chrome.driver"/>
+        <property name="driverPath" value="src/test/resources/chromedriver/mac/chromedriver"/>
+    </bean>
+
+    <bean id="firefox-mac" class="com.sample.test.demo.framework.TestBase">
+        <property name="driverKey" value="webdriver.gecko.driver"/>
+        <property name="driverPath" value="src/test/resources/firefoxdriver/mac/geckodriver"/>
+    </bean>
+
+    <bean id="chrome" class="org.openqa.selenium.chrome.ChromeDriver" lazy-init="true"/>
+    <bean id="firefox" class="org.openqa.selenium.firefox.FirefoxDriver" lazy-init="true"/>
+</beans>

@@ -4,7 +4,9 @@ import static org.testng.Assert.fail;
 
 import com.sample.test.demo.utils.Configuration;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -15,11 +17,29 @@ public class TestBase {
     private Configuration config;
     protected WebDriver driver;
     protected String url;
+    private String driverKey;
+    private String driverPath;
 
-    //TODO relaunch driver if driver is null in between tests
+    public String getDriverKey() {
+        return driverKey;
+    }
+
+    public void setDriverKey(String driverKey) {
+        this.driverKey = driverKey;
+    }
+
+
+    public String getDriverPath() {
+        return driverPath;
+    }
+
+    public void setDriverPath(String driverPath) {
+        this.driverPath = driverPath;
+    }
+//TODO relaunch driver if driver is null in between tests
 
     @BeforeClass(alwaysRun = true)
-    public void init() {
+    public void init() throws CustomTestException {
         try {
             config = new Configuration();
         } catch (IOException e) {
@@ -41,20 +61,17 @@ public class TestBase {
         }
     }
 
-    private void initializeDriver() {
-        Log.info("config.getPlatform(): " + config.getPlatform());
-        if (config.getBrowser().equalsIgnoreCase("chrome")) {
-            if (config.getPlatform().equalsIgnoreCase("mac")) {
-                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/mac/chromedriver");
-            } else if (config.getPlatform().contains("linux")) {
-                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/linux/chromedriver");
-            } else {
-                System.setProperty("webdriver.chrome.driver",
-                        "src/test/resources/chromedriver/windows/chromedriver.exe");
-            }
-            driver = new ChromeDriver();
-        } else {
-            fail("Unsupported browser " + config.getBrowser());
+    private void initializeDriver() throws CustomTestException {
+        try {
+            String browserBeanId = String.format("%s-%s", config.getBrowser(), config.getPlatform());
+            Log.info("config.getBrowser()-config.getPlatform(): " + browserBeanId);
+
+            ApplicationContext applicationContext = new ClassPathXmlApplicationContext("browsers-beans.xml");
+            TestBase testBase = applicationContext.getBean(browserBeanId, TestBase.class);
+            System.setProperty(testBase.getDriverKey(), testBase.getDriverPath());
+            this.driver = applicationContext.getBean(config.getBrowser(), WebDriver.class);
+        } catch (NoSuchBeanDefinitionException e) {
+            throw new CustomTestException(String.format("Unsupported browser: %s or platform: %s", config.getBrowser(), config.getPlatform()), e);
         }
 
     }
